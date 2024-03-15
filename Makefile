@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Werror -Wextra -Wall
 NAME = printf.a
 LIBRARY =  libft/*.c \
-		sourc/*.c \
+		source/*.c \
 		main.c
 OBJ = ./*.o
 EXECUTE = ./a.out

@@ -1,6 +1,7 @@
-#include "Library/libft.h"
+#include "ft_printf.h"
 
 int main()
 {
-    printf("%ld\n", ft_strlen("hello worl"));
+    char c = 'c';
+    printf("%d\n", ft_printf("c", c));
 }
