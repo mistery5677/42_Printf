@@ -3,7 +3,7 @@ CFLAGS = -Werror -Wextra -Wall
 NAME = printf.a
 LIBRARY =  libft/*.c \
 		source/*.c \
-		main.c
+		tester.c
 OBJ = ./*.o
 EXECUTE = ./a.out
 
