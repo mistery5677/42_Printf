@@ -4,5 +4,7 @@
 #include <stdarg.h>
 
 int ft_printf(const char *, ...);
+void ft_putchar(char c);
+void ft_printstr(char *str);
 
 #endif 

@@ -1,30 +1,40 @@
 #include "../ft_printf.h"
 
-int ft_printf(const char *str, ...)
+int ft_printf(const char *format, ...)
 {
     va_list args;
+    char word;
     int i;
     int next;
-    char word;
 
     i = 0;
     next = i + 1;
-    va_start(args, str);
-    while(str[i])
+    word = 0;
+    va_start(args, format);
+    while(format[i])
     {
+        word = format[i];
         next = i + 1;
-        word =  str[i];
-        if(str[i] == '%' && (str[next] == 'c' || str[next] == '%'))
+        if(format[i] == '%')
         {
-            if(str[next] == '%')
-                next++; //Para poupar linhas (funcional)
-            else
+            if(format[next] == '%')
+                ft_putchar(word);
+            else if(format[next] == 'c')
+            {
                 word = va_arg(args, int);
+                ft_putchar(word);
+            }
+            else if(format[next] == 's')
+            {
+                char *str;
+                str = va_arg(args, char *);
+                ft_printstr(str);
+            }
             i++;
         }
-        ft_putchar(word);
+        else
+            ft_putchar(word);
         i++;
     }
-    va_end(args);
     return 0;
 }

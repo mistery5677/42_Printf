@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall
-NAME = printf.a
+NAME = libftprintf.a
 LIBRARY =  libft/*.c \
 		source/*.c \
 		tester.c
