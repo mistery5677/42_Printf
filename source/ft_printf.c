@@ -30,6 +30,16 @@ int ft_printf(const char *format, ...)
                 str = va_arg(args, char *);
                 ft_printstr(str);
             }
+            else if(format[next] == 'p')
+                ft_printadd(va_arg(args, long));
+            else if(format[next] == 'd' || format[next] == 'i')
+                ft_printnbr(va_arg(args, int));
+            else if(format[next] == 'u')
+                ft_print_unsigned(va_arg(args, unsigned int));
+            else if(format[next] == 'x')
+                ft_print_hex(va_arg(args, unsigned int), 'a');
+            else if(format[next] == 'X')
+                ft_print_hex(va_arg(args, unsigned int), 'A');
             i++;
         }
         else
