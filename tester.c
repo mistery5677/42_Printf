@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 
 
-int main()
+/*int main()
 {
     ft_printf("TESTING FT_PRINTF\n\n");
     
@@ -25,8 +25,8 @@ int main()
 
     int num = 92;
     ft_printf("Testing decimal number\n");
-    printf("original: %d\n", num);
-    ft_printf("mine: %d\n\n", num);
+    printf("original: %d\n", 42);
+    ft_printf("mine: %d %d\n\n", 42, 123.45);
 
     ft_printf("Testing decimal integer\n");
     printf("original: %i\n", num);
@@ -37,7 +37,7 @@ int main()
     printf("original: %u\n", num2);
     ft_printf("mine: %u\n\n", num2);
 
-    int num3 = 3000;
+    unsigned int num3 = -609396;
     ft_printf("Testing base hexadecimal lower\n");
     printf("original: %x\n", num3);
     ft_printf("mine: %x\n\n", num3);
@@ -45,4 +45,9 @@ int main()
     ft_printf("Testing base hexadecimal upper\n");
     printf("original: %X\n", num3);
     ft_printf("mine: %X\n\n", num3);
+}*/
+
+int main()
+{
+    ft_printf("hello %c %c", 'c', 'd');
 }
