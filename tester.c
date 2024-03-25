@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "source/ft_printf.h"
 
 
 /*int main()
@@ -49,5 +49,5 @@
 
 int main()
 {
-    ft_printf("hello %c %c", 'c', 'd');
+    ft_printf("hello");
 }

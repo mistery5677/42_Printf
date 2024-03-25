@@ -1,4 +1,4 @@
-#include "../ft_printf.h"
+#include "./ft_printf.h"
 
 /*int ft_printf(const char *format, ...)
 {
@@ -97,45 +97,50 @@ int ft_printf(const char *format, ...)
 
 ///////////Nova versão/////////
 
-int ft_printchar(char c)
+int ft_conversion(va_list args, const char format)
 {
-    write(1, &c, 1);
-    return 1;
-}
+    int len;
 
-
-// converte e imprime na tela
-// retorna um numero de caracteres printados
-int	ft_conversion(va_list args, const char format)
-{
-	if (format == 'c')
-        return (ft_printchar(va_arg(args, int)));
-    return(0);
+    len = 0;
+    if(format == 'c')
+        len += ft_putchar(va_arg(args, int));
+    else if(format == 'p')
+        ft_printadd(va_arg(args, long));
+    else if(format == 'd' || format == 'i')
+        ft_printnbr(va_arg(args, int));
+    else if(format == 'u')
+        ft_print_unsigned(va_arg(args, unsigned int));
+    else if(format == 'x')
+        ft_print_hex(va_arg(args, unsigned int), 'a');
+    else if(format == 'X')
+        ft_print_hex(va_arg(args, unsigned int), 'A');
+    return len;
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int		len;
-	size_t	idx;
-
-	if (!format)
-		return (-1);
-	len = 0;
-	idx = 0;
+    size_t i;
 	va_start(args, format);
-	while (format[idx])
+    int len;
+
+    len = 0;
+    i = -1;
+	while (format[++i])
 	{
-		if (format[idx] == '%')
+		if (format[i] == '%')
 		{
-			len += ft_conversion(args, format[idx + 1]);
-			idx++;
+			len += ft_conversion(args, format[i + 1]);
+			i++;
 		}
-		// depois mudar p else:
-		else if (format[idx] != '%')
-			len += ft_printchar(format[idx]);
-		idx++;
+		else
+			len += ft_putchar(format[i]);
 	}
 	va_end(args);
 	return (len);
+}
+
+int main()
+{
+    ft_printf("hello");
 }

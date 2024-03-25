@@ -1,5 +1,5 @@
 #ifndef LIBFT_H
-# define LIBFT_H
+#define LIBFT_H
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -12,7 +12,6 @@ typedef struct s_list
         struct s_list *next;
 } t_list;
 
-void ft_putchar(char c);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
 int ft_isalnum(int c);
