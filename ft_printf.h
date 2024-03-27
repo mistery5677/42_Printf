@@ -5,8 +5,7 @@
 
 int ft_printf(const char *, ...);
 int ft_putchar(char c);
-void ft_printstr(char *str);
-void ft_printadd(unsigned long long str);
+size_t ft_printstr(char *str);
 size_t ft_printnbr(long int nbr);
 size_t ft_print_unsigned(unsigned int nbr);
 size_t ft_print_hex(unsigned long long num, int format);

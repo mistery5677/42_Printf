@@ -71,4 +71,10 @@ int main()
     ft_printf("tamanho %d\n", d);
     size_t original = printf("hello world %p\n", &teste5);
     printf("tamanho = %ld\n", original);
+
+    char *teste6 = "123";
+    size_t e = ft_printf("hello world %s\n", teste6);
+    ft_printf("tamanho %d\n", e);
+    size_t original2 = printf("hello world %s\n", teste6);
+    printf("tamanho = %ld\n", original2);
 }   

@@ -1,6 +1,6 @@
 #include "./ft_printf.h"
 
-void ft_printstr(char *str)
+size_t ft_printstr(char *str)
 {
     int i;
 
@@ -10,4 +10,5 @@ void ft_printstr(char *str)
         ft_putchar(str[i]);
         i++;
     }
+    return i;
 }
