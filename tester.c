@@ -1,5 +1,5 @@
-#include "source/ft_printf.h"
 
+#include "ft_printf.h"
 
 /*int main()
 {
@@ -49,5 +49,26 @@
 
 int main()
 {
-    ft_printf("hello");
-}
+    // 13 letras na frase
+    int teste = 1923;
+    size_t i = ft_printf("hello world %d\n", teste);
+    printf("tamanho = %ld\n", i);
+
+    char teste2 = 'a';
+    size_t a = ft_printf("hello world %c\n", teste2);
+    printf("tamanho = %ld\n", a);
+
+    unsigned int teste3 = 1234567;
+    size_t b = ft_printf("hello world %u\n", teste3);
+    printf("tamanho = %ld\n", b);
+
+    unsigned int teste4 = 1;
+    size_t c = ft_printf("hello world %x\n", teste4);
+    printf("tamanho = %ld\n", c);
+
+    char teste5 = 'a';
+    size_t d = ft_printf("hello world %p\n", &teste5);
+    ft_printf("tamanho %d\n", d);
+    size_t original = printf("hello world %p\n", &teste5);
+    printf("tamanho = %ld\n", original);
+}   

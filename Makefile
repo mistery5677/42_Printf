@@ -8,14 +8,13 @@ LIBFTDIR =./libft
 RM = rm -f
 CP = cp
 SRCS = ft_printf.c \
-	ft_print_unsigned.c \
-	ft_printadd.c \
-	ft_printhex.c \
 	ft_printnbr.c \
 	ft_printstr.c \
 	ft_putchar.c \
+	tester.c 
 	
 OBJS = $(SRCS:.c=.o)
+EXECUTE = ./a.out
 
 all: $(NAME) $(LIBFT)
 
@@ -39,7 +38,8 @@ fclean:	clean
 
 re:	fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:	all clean fclean re
+
 teste: all clean
 	$(CC) $(CFLAGS) $(NAME)
 	$(EXECUTE)

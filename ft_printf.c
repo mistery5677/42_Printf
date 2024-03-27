@@ -97,23 +97,40 @@ int ft_printf(const char *format, ...)
 
 ///////////Nova versão/////////
 
+size_t ft_count_words(char * str)
+{
+    size_t i;
+
+    i = 0;
+    while(str[i])
+        i++;
+    return i;
+}
+
 int ft_conversion(va_list args, const char format)
 {
     int len;
 
     len = 0;
     if(format == 'c')
-        len += ft_putchar(va_arg(args, int));
-    else if(format == 'p')
-        ft_printadd(va_arg(args, long));
-    else if(format == 'd' || format == 'i')
-        ft_printnbr(va_arg(args, int));
+        len += ft_putchar(va_arg(args, int)); //testado OK
+     else if(format == 'd' || format == 'i')
+        len += ft_printnbr(va_arg(args, int)); //testado OK
     else if(format == 'u')
-        ft_print_unsigned(va_arg(args, unsigned int));
+        len += ft_print_unsigned(va_arg(args, unsigned int)); //testado OK
     else if(format == 'x')
-        ft_print_hex(va_arg(args, unsigned int), 'a');
+        len += ft_print_hex(va_arg(args, unsigned long long), 'a'); //testado OK
     else if(format == 'X')
-        ft_print_hex(va_arg(args, unsigned int), 'A');
+        len += ft_print_hex(va_arg(args, unsigned long long), 'A'); //testado OK
+    else if(format == 'p') // testado OK
+    {
+        len += ft_printf("0x");
+        len += ft_print_hex(va_arg(args, unsigned long long int), 'a'); 
+    }
+    else if(format == 's')
+        len += ft_printstr(va_arg(args,const char *));
+    else if(format == '%')
+        len += ft_putchar('%');
     return len;
 }
 
@@ -138,9 +155,4 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return (len);
-}
-
-int main()
-{
-    ft_printf("hello");
 }

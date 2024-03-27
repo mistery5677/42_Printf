@@ -52,7 +52,7 @@ char *ft_itoa(int n)
     char *str;
     size_t size;
 
-    size = divide_nbr(n);
+    size = divide_nbr((int)n);
     str =  malloc((size + 1) * sizeof(char));
     if(!str)
         return NULL;

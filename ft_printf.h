@@ -7,8 +7,9 @@ int ft_printf(const char *, ...);
 int ft_putchar(char c);
 void ft_printstr(char *str);
 void ft_printadd(unsigned long long str);
-void ft_printnbr(long int nbr);
-void ft_print_unsigned(unsigned int nbr);
-void ft_print_hex(unsigned int num, int format);
+size_t ft_printnbr(long int nbr);
+size_t ft_print_unsigned(unsigned int nbr);
+size_t ft_print_hex(unsigned long long num, int format);
+size_t ft_count_words(char * str);
 
 #endif 
