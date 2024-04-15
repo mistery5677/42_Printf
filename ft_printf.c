@@ -184,7 +184,6 @@ int main()
     printf("words: %d\n", teste);
     teste2 = printf("original:  %i  ", 0);
     printf("words: %d\n\n", teste2);
-
     
     ft_printf("--> Testing %%u <--\n");
     ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
@@ -197,14 +196,27 @@ int main()
     printf("words: %d\n", teste);
     teste2 = printf("original:  %u  ", 2147483647);
     printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %u  ", 2147483648);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %u  ", 2147483647);
-    printf("words: %d\n\n", teste2);
     
     teste = ft_printf("mine:  %u  ", 1);
     printf("words: %d\n", teste);
     teste2 = printf("original:  %u  ", 1);
+    printf("words: %d\n\n", teste2);
+
+    ft_printf("--> Testing %%x <--\n");
+    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
+
+    teste = ft_printf("mine:  %x  ", 100);
+    printf("words: %d\n", teste);
+    teste2 = printf("original:  %x  ", 100);
+    printf("words: %d\n\n", teste2);
+    
+    teste = ft_printf("mine:  %x  ", 2147483647);
+    printf("words: %d\n", teste);
+    teste2 = printf("original:  %x  ", -1);
+    printf("words: %d\n\n", teste2);
+    
+    teste = ft_printf("mine:  %x  ", 2147483647);
+    printf("words: %d\n", teste);
+    teste2 = printf("original:  %x  ", 2147483647);
     printf("words: %d\n\n", teste2);
 }   

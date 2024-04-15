@@ -1,20 +1,20 @@
 #include "./ft_printf.h"
 
-static size_t divide_nbrbase(long long int n, int base) //Count numbers;
+static size_t divide_nbrbase(long long int nbr, int base) //Count numbers;
 {
     size_t len;
 
     len = 0;
-    if(n < 0)
+    if(nbr < 0)
     {
         len++;
-        n *= -1;
+        nbr *= -1;
     }
-    else if(n == 0)
+    else if(nbr == 0)
         return 1;
-    while(n > 0)
+    while(nbr > 0)
     {
-        n = n/base;
+        nbr = nbr/base;
         len++;
     }
     return len;
@@ -54,20 +54,23 @@ size_t ft_print_unsigned(unsigned int nbr)
     return len;
 }
 
-size_t ft_print_hex(unsigned long long num, int format)
+size_t ft_print_hex(int long nbr, int format)
 {
     size_t len;
 
-    len = divide_nbrbase(num, 16);
-    if(num > 16)
+    len = divide_nbrbase(nbr, 16);
+    if(nbr > 2147483647 || nbr < -2147483648)
+        return (0);
+    
+    if(nbr > 16)
     {
-        ft_print_hex(num / 16, format);
-        num = num % 16;
+        ft_print_hex(nbr / 16, format);
+        nbr = nbr % 16;
     }
-    if(num <= 9)
-        num = num + '0';
+    if(nbr <= 9)
+        nbr = nbr + '0';
     else 
-        num = num + format - 10;
-    write(1, &num, 1);
+        nbr = nbr + format - 10;
+    write(1, &nbr, 1);
     return len;
 }
