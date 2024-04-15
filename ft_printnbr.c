@@ -1,10 +1,17 @@
 #include "./ft_printf.h"
 
-size_t divide_nbrbase(unsigned long long n, int base) //Count numbers;
+static size_t divide_nbrbase(long long int n, int base) //Count numbers;
 {
     size_t len;
 
     len = 0;
+    if(n < 0)
+    {
+        len++;
+        n *= -1;
+    }
+    else if(n == 0)
+        return 1;
     while(n > 0)
     {
         n = n/base;
@@ -13,12 +20,14 @@ size_t divide_nbrbase(unsigned long long n, int base) //Count numbers;
     return len;
 }
 
-size_t ft_printnbr(long int nbr)
+size_t ft_printnbr(int nbr)
 {
     size_t len;
 
     len = 0;
 
+    if(nbr > 2147483647 || nbr < -2147483647)
+        return (0);
     ft_putnbr_fd(nbr, 1);
     len = divide_nbrbase(nbr, 10);
     return len;
@@ -30,6 +39,8 @@ size_t ft_print_unsigned(unsigned int nbr)
 
     len = 0;
     len = divide_nbrbase(nbr, 10);
+    if(nbr > 2147483647)
+        return (0);
     if(nbr >= 10)
     {
         ft_print_unsigned(nbr / 10);

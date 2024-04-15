@@ -1,17 +1,16 @@
 NAME = libftprintf.a
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 LIBC = ar rc
 LIBR = ranlib
-LIBFT = $(LIBFTDIR)/libft.a
 LIBFTDIR =./libft
+LIBFT = $(LIBFTDIR)/libft.a
 RM = rm -f
 CP = cp
 SRCS = ft_printf.c \
 	ft_printnbr.c \
 	ft_printstr.c \
 	ft_putchar.c \
-	tester.c 
 	
 OBJS = $(SRCS:.c=.o)
 EXECUTE = ./a.out
@@ -27,7 +26,7 @@ $(LIBFT): $(LIBFTDIR)
 	@$(MAKE) -C $(LIBFTDIR)
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	@$(MAKE) clean -C $(LIBFTDIR)
 	$(RM) $(OBJS)
@@ -38,9 +37,7 @@ fclean:	clean
 
 re:	fclean all
 
-.PHONY:	all clean fclean re
-
-teste: all clean
-	$(CC) $(CFLAGS) $(NAME)
-	$(EXECUTE)
+teste: all
+	$(CC) $(FLAGS) $(NAME)
+	@$(EXECUTE)
 	

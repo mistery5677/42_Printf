@@ -1,30 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miafonso <miafonso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/08 15:19:22 by miafonso          #+#    #+#             */
+/*   Updated: 2024/04/08 15:19:22 by miafonso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include <stdio.h>
 
-void ft_striteri(char *s, void (*f)(unsigned int, char *))
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-        unsigned i;
+	unsigned int	i;
 
-        i = 0;
-        if (!s)
+	i = 0;
+	if (!s)
 		return ;
-        while(s[i])
-        {
-                f(i, s + i);
-                i++;
-        }
+	while (s[i])
+	{
+		f(i, s + i);
+		i++;
+	}
 }
 
-/*void my_function(unsigned int index, char *character) 
+/*void my_function(unsigned int index, char *character)
 {
-        *character = *character + 1;
+		*character = *character + 1;
 }
 
-int main() {
-    char strmapi_string[] = "Hello";
-    printf("Input string: %s\n", strmapi_string);
+#include <stdio.h>
+int	main(void) {
+	char strmapi_string[] = "Hello";
+	printf("Input string: %s\n", strmapi_string);
 
-    ft_striteri(strmapi_string, &my_function);
+	ft_striteri(strmapi_string, &my_function);
 
-    printf("Result: %s\n", strmapi_string);
+	printf("Result: %s\n", strmapi_string);
 }*/
