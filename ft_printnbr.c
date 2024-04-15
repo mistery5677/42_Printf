@@ -54,14 +54,12 @@ size_t ft_print_unsigned(unsigned int nbr)
     return len;
 }
 
-size_t ft_print_hex(int long nbr, int format)
+size_t ft_print_hex(unsigned int nbr, int format)
 {
     size_t len;
 
     len = divide_nbrbase(nbr, 16);
-    if(nbr > 2147483647 || nbr < -2147483648)
-        return (0);
-    
+
     if(nbr > 16)
     {
         ft_print_hex(nbr / 16, format);

@@ -22,9 +22,9 @@ static int ft_conversion(va_list args, const char format)
     else if(format == 'u')
         len += ft_print_unsigned(va_arg(args, unsigned int)); //testado OK
     else if(format == 'x')
-        len += ft_print_hex(va_arg(args, unsigned long long), 'a'); //testado OK
+        len += ft_print_hex(va_arg(args, unsigned int), 'a'); //testado OK
     else if(format == 'X')
-        len += ft_print_hex(va_arg(args, unsigned long long), 'A'); //testado OK
+        len += ft_print_hex(va_arg(args, unsigned int), 'A'); //testado OK
     else if(format == 'p') // testado OK
     {
         len += ft_printf("0x");
@@ -212,11 +212,29 @@ int main()
     
     teste = ft_printf("mine:  %x  ", 2147483647);
     printf("words: %d\n", teste);
-    teste2 = printf("original:  %x  ", -1);
+    teste2 = printf("original:  %x  ", 2147483647);
     printf("words: %d\n\n", teste2);
     
-    teste = ft_printf("mine:  %x  ", 2147483647);
+    teste = ft_printf("mine:  %x  ", 2);
     printf("words: %d\n", teste);
-    teste2 = printf("original:  %x  ", 2147483647);
+    teste2 = printf("original:  %x  ", 2);
+    printf("words: %d\n\n", teste2);
+
+    ft_printf("--> Testing %%X <--\n");
+    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
+
+    teste = ft_printf("mine:  %X  ", 100);
+    printf("words: %d\n", teste);
+    teste2 = printf("original:  %X  ", 100);
+    printf("words: %d\n\n", teste2);
+    
+    teste = ft_printf("mine:  %X  ", 2147483647);
+    printf("words: %d\n", teste);
+    teste2 = printf("original:  %X  ", 2147483647);
+    printf("words: %d\n\n", teste2);
+    
+    teste = ft_printf("mine:  %X  ", 2);
+    printf("words: %d\n", teste);
+    teste2 = printf("original:  %X  ", 2);
     printf("words: %d\n\n", teste2);
 }   
