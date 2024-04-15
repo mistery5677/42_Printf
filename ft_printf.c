@@ -28,7 +28,7 @@ static int ft_conversion(va_list args, const char format)
     else if(format == 'p') // testado OK
     {
         len += ft_printf("0x");
-        len += ft_print_hex(va_arg(args, unsigned long long int), 'a'); 
+        len += ft_print_add(va_arg(args, unsigned long long int)); 
     }
     else if(format == 's')
         len += ft_printstr(va_arg(args,char *));
@@ -236,5 +236,27 @@ int main()
     teste = ft_printf("mine:  %X  ", 2);
     printf("words: %d\n", teste);
     teste2 = printf("original:  %X  ", 2);
+    printf("words: %d\n\n", teste2);
+
+    ft_printf("--> Testing %%p <--\n");
+    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
+
+    char *str1 = NULL;
+    char *str2 = "hello";
+    char *str3 = str2;
+
+    teste = ft_printf("mine:  %p  ", str1);
+    printf("words: %d\n", teste);
+    teste2 = printf("original:  %p  ", str1);
+    printf("words: %d\n\n", teste2);
+    
+    teste = ft_printf("mine:  %p  ", &str2);
+    printf("words: %d\n", teste);
+    teste2 = printf("original:  %p  ", &str2);
+    printf("words: %d\n\n", teste2);
+    
+    teste = ft_printf("mine:  %p  ", str3);
+    printf("words: %d\n", teste);
+    teste2 = printf("original:  %p  ", str3);
     printf("words: %d\n\n", teste2);
 }   

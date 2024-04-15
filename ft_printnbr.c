@@ -72,3 +72,24 @@ size_t ft_print_hex(unsigned int nbr, int format)
     write(1, &nbr, 1);
     return len;
 }
+
+size_t ft_print_add(unsigned long long int nbr)
+{
+    size_t len;
+
+    len = divide_nbrbase(nbr, 16);
+
+    if(nbr >= 16)
+    {
+        ft_print_add(nbr / 16);
+        ft_print_add(nbr % 16);
+    }
+	else
+	{
+		if (nbr <= 9)
+			ft_putchar_fd((nbr + '0'), 1);
+		else
+			ft_putchar_fd((nbr - 10 + 'a'), 1);
+	}
+    return len;
+}
