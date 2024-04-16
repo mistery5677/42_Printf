@@ -73,7 +73,7 @@ size_t ft_print_hex(unsigned int nbr, int format)
     return len;
 }
 
-size_t ft_print_add(unsigned long long int nbr)
+/* size_t ft_print_add(unsigned long long int nbr)
 {
     size_t len;
 
@@ -92,4 +92,4 @@ size_t ft_print_add(unsigned long long int nbr)
 			ft_putchar_fd((nbr - 10 + 'a'), 1);
 	}
     return len;
-}
+} */

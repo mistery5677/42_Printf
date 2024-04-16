@@ -11,6 +11,7 @@ size_t ft_printnbr(int nbr);
 size_t ft_print_unsigned(unsigned int nbr);
 size_t ft_print_hex(unsigned int num, int format);
 size_t ft_count_words(char * str);
-size_t ft_print_add(unsigned long long int nbr);
+int ft_print_add(unsigned long long nbr);
+void ft_put_add(unsigned long long nbr);
 
 #endif 

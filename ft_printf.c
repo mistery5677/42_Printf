@@ -22,14 +22,11 @@ static int ft_conversion(va_list args, const char format)
     else if(format == 'u')
         len += ft_print_unsigned(va_arg(args, unsigned int)); //testado OK
     else if(format == 'x')
-        len += ft_print_hex(va_arg(args, unsigned int), 'a'); //testado OK
+        len += ft_print_hex(va_arg(args, unsigned long int), 'a'); //testado OK
     else if(format == 'X')
-        len += ft_print_hex(va_arg(args, unsigned int), 'A'); //testado OK
+        len += ft_print_hex(va_arg(args, unsigned long int), 'A'); //testado OK
     else if(format == 'p') // testado OK
-    {
-        len += ft_printf("0x");
-        len += ft_print_add(va_arg(args, unsigned long long int)); 
-    }
+        len += ft_print_add(va_arg(args, unsigned long long));
     else if(format == 's')
         len += ft_printstr(va_arg(args,char *));
     else if(format == '%')
@@ -62,8 +59,16 @@ int	ft_printf(const char *format, ...)
 	return (len);
 }
 
-
+/*#include <limits.h>
 int main()
+{
+    int teste = printf("%lx   ", LONG_MIN);
+    printf("%d\n", teste);
+    int teste2 = ft_printf("%p   ", LONG_MIN);
+    ft_printf("%d\n", teste2);
+}*/
+
+/* int main()
 {
     ft_printf("\n------> Testing len without arguments <------\n\n");
     int teste = printf("original: ");
@@ -84,11 +89,11 @@ int main()
     teste2 = ft_printf("\t\n\v\f\r");
     printf("%d\n\n", teste2);
 
-    /*ft_printf("Testing with NULL\n");
+    ft_printf("Testing with NULL\n");
     teste = printf(NULL);
     printf("%d\n", teste);
     teste2 = ft_printf(NULL);
-    ft_printf("%d\n\n", teste2); */
+    ft_printf("%d\n\n", teste2);
 
     ft_printf("------> Testing with arguments <------\n\n");
     ft_printf("--> Testing double percent <--\n");
@@ -120,11 +125,11 @@ int main()
     teste2 = printf("original:  %c%c%c%c%c  ", 'h', 'e', 'l', 'l', 'o');
     printf("words: %d\n\n", teste2);
 
-    /*char word = NULL;
+    char word = NULL;
     teste = ft_printf("mine: %c", word);
     printf("%d\n", teste);
     teste2 = printf("original: %c", word);
-    printf("%d\n\n", teste2);*/
+    printf("%d\n\n", teste2);
 
     teste = ft_printf("mine: %c", 48);
     printf("%d\n", teste);
@@ -259,4 +264,4 @@ int main()
     printf("words: %d\n", teste);
     teste2 = printf("original:  %p  ", str3);
     printf("words: %d\n\n", teste2);
-}   
+}    */
