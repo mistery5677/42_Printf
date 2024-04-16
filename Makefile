@@ -11,7 +11,7 @@ SRCS = ft_printf.c \
 	ft_printnbr.c \
 	ft_printstr.c \
 	ft_putchar.c \
-	ft_print_ptr.c
+	ft_print_add.c
 	
 OBJS = $(SRCS:.c=.o)
 EXECUTE = ./a.out

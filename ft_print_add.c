@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static size_t ft_divide_nbrbase(long long int nbr, int base) //Count numbers;
+static size_t ft_divide_nbrbase(unsigned long long nbr, int base) //Count numbers;
 {
     int len;
 
@@ -13,7 +13,7 @@ static size_t ft_divide_nbrbase(long long int nbr, int base) //Count numbers;
     return len;
 }
 
-void ft_put_add(unsigned long long nbr)
+static void ft_put_add(unsigned long long nbr)
 {
 
     if(nbr >= 16)
@@ -35,6 +35,8 @@ int	ft_print_add(unsigned long long add)
 	int	len;
 
 	len = 0;
+	if (!add)
+		return ft_printstr("(nil)");
 	len += ft_printstr("0x");
 	if (add == 0)
 		len += write(1, "0", 1);

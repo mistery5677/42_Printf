@@ -1,15 +1,5 @@
 #include "ft_printf.h"
 
-size_t ft_count_words(char * str)
-{
-    size_t i;
-
-    i = 0;
-    while(str[i])
-        i++;
-    return i;
-}
-
 static int ft_conversion(va_list args, const char format)
 {
     int len;
@@ -26,9 +16,9 @@ static int ft_conversion(va_list args, const char format)
     else if(format == 'X')
         len += ft_print_hex(va_arg(args, unsigned long int), 'A'); //testado OK
     else if(format == 'p') // testado OK
-        len += ft_print_add(va_arg(args, unsigned long long));
+        len += ft_print_add(va_arg(args, long long));
     else if(format == 's')
-        len += ft_printstr(va_arg(args,char *));
+        len += ft_printstr(va_arg(args,const char *));
     else if(format == '%')
         len += ft_putchar('%');
     return len;
@@ -59,14 +49,14 @@ int	ft_printf(const char *format, ...)
 	return (len);
 }
 
-/*#include <limits.h>
-int main()
+#include <limits.h>
+/* int main()
 {
-    int teste = printf("%lx   ", LONG_MIN);
+    int teste = printf("%u   ", ULONG_MAX);
     printf("%d\n", teste);
-    int teste2 = ft_printf("%p   ", LONG_MIN);
+    int teste2 = ft_printf("%u   ", ULONG_MAX);
     ft_printf("%d\n", teste2);
-}*/
+} */
 
 /* int main()
 {

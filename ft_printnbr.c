@@ -26,8 +26,6 @@ size_t ft_printnbr(int nbr)
 
     len = 0;
 
-    if(nbr > 2147483647 || nbr < -2147483647)
-        return (0);
     ft_putnbr_fd(nbr, 1);
     len = divide_nbrbase(nbr, 10);
     return len;
@@ -39,8 +37,6 @@ size_t ft_print_unsigned(unsigned int nbr)
 
     len = 0;
     len = divide_nbrbase(nbr, 10);
-    if(nbr > 2147483647)
-        return (0);
     if(nbr >= 10)
     {
         ft_print_unsigned(nbr / 10);
@@ -54,13 +50,12 @@ size_t ft_print_unsigned(unsigned int nbr)
     return len;
 }
 
-size_t ft_print_hex(unsigned int nbr, int format)
+size_t ft_print_hex(unsigned long int nbr, int format)
 {
     size_t len;
 
     len = divide_nbrbase(nbr, 16);
-
-    if(nbr > 16)
+    if(nbr >= 16)
     {
         ft_print_hex(nbr / 16, format);
         nbr = nbr % 16;
@@ -72,24 +67,3 @@ size_t ft_print_hex(unsigned int nbr, int format)
     write(1, &nbr, 1);
     return len;
 }
-
-/* size_t ft_print_add(unsigned long long int nbr)
-{
-    size_t len;
-
-    len = divide_nbrbase(nbr, 16);
-
-    if(nbr >= 16)
-    {
-        ft_print_add(nbr / 16);
-        ft_print_add(nbr % 16);
-    }
-	else
-	{
-		if (nbr <= 9)
-			ft_putchar_fd((nbr + '0'), 1);
-		else
-			ft_putchar_fd((nbr - 10 + 'a'), 1);
-	}
-    return len;
-} */
