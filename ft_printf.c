@@ -1,45 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miafonso <miafonso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/17 11:24:13 by miafonso          #+#    #+#             */
+/*   Updated: 2024/04/17 11:24:13 by miafonso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-static int ft_conversion(va_list args, const char format)
+static int	ft_conversion(va_list args, const char format)
 {
-    int len;
+	int	len;
 
-    len = 0;
-    if(format == 'c')
-        len += ft_putchar(va_arg(args, int)); //testado OK
-     else if(format == 'd' || format == 'i')
-        len += ft_printnbr(va_arg(args, int)); //testado OK
-    else if(format == 'u')
-        len += ft_print_unsigned(va_arg(args, unsigned int)); //testado OK
-    else if(format == 'x')
-        len += ft_print_hex(va_arg(args, unsigned long int), 'a'); //testado OK
-    else if(format == 'X')
-        len += ft_print_hex(va_arg(args, unsigned long int), 'A'); //testado OK
-    else if(format == 'p') // testado OK
-        len += ft_print_add(va_arg(args, long long));
-    else if(format == 's')
-        len += ft_printstr(va_arg(args,const char *));
-    else if(format == '%')
-        len += ft_putchar('%');
-    return len;
+	len = 0;
+	if (format == 'c')
+		len += ft_putchar(va_arg(args, int));
+	else if (format == 'd' || format == 'i')
+		len += ft_printnbr(va_arg(args, int));
+	else if (format == 'u')
+		len += ft_print_unsigned(va_arg(args, unsigned int));
+	else if (format == 'x')
+		len += ft_print_hex(va_arg(args, unsigned int), 'a');
+	else if (format == 'X')
+		len += ft_print_hex(va_arg(args, unsigned int), 'A');
+	else if (format == 'p')
+		len += ft_print_add(va_arg(args, long long));
+	else if (format == 's')
+		len += ft_printstr(va_arg(args, const char *));
+	else if (format == '%')
+		len += ft_putchar('%');
+	return (len);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-    size_t i;
-	va_start(args, format);
-    int len;
+	size_t	i;
+	int		len;
 
-    if(format == NULL)
-        return -1;
-    len = 0;
-    i = -1;
+	va_start(args, format);
+	if (format == NULL)
+		return (-1);
+	len = 0;
+	i = -1;
 	while (format[++i])
 	{
 		if (format[i] == '%')
 		{
-            len += ft_conversion(args, format[i + 1]);
+			len += ft_conversion(args, format[i + 1]);
 			i++;
 		}
 		else
@@ -48,210 +60,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
-
-#include <limits.h>
-/* int main()
-{
-    int teste = printf("%u   ", ULONG_MAX);
-    printf("%d\n", teste);
-    int teste2 = ft_printf("%u   ", ULONG_MAX);
-    ft_printf("%d\n", teste2);
-} */
-
-/* int main()
-{
-    ft_printf("\n------> Testing len without arguments <------\n\n");
-    int teste = printf("original: ");
-    printf("%d\n", teste);
-    int teste2 = ft_printf("mine: ");
-    printf("%d\n\n", teste2);
-    
-    ft_printf("Testing without words\n");
-    char teste3 = 0;
-    teste = printf("%c", teste3);
-    printf("%d\n", teste);
-    teste2 = ft_printf("");
-    printf("%d\n\n", teste2);
-
-    ft_printf("Testing spaces\n");
-    teste = printf("\t\n\v\f\r");
-    printf("%d\n", teste);
-    teste2 = ft_printf("\t\n\v\f\r");
-    printf("%d\n\n", teste2);
-
-    ft_printf("Testing with NULL\n");
-    teste = printf(NULL);
-    printf("%d\n", teste);
-    teste2 = ft_printf(NULL);
-    ft_printf("%d\n\n", teste2);
-
-    ft_printf("------> Testing with arguments <------\n\n");
-    ft_printf("--> Testing double percent <--\n");
-    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
-    teste = ft_printf("mine --->%%");
-    printf("%d\n", teste);
-    teste2 = printf("original --->%%");
-    printf("%d\n\n", teste2);
-
-    teste = ft_printf("mine --->%%%%");
-    printf("%d\n", teste);
-    teste2 = printf("original --->%%%%");
-    printf("%d\n\n", teste2);
-
-    teste = ft_printf("mine --->%%%%%%%%%%");
-    printf("%d\n", teste);
-    teste2 = printf("original --->%%%%%%%%%%");
-    printf("%d\n\n", teste2);
-
-    ft_printf("--> Testing %%c <--\n");
-    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
-    teste = ft_printf("mine:  %c  ", 'a');
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %c  ", 'a');
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %c%c%c%c%c  ", 'h', 'e', 'l', 'l', 'o');
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %c%c%c%c%c  ", 'h', 'e', 'l', 'l', 'o');
-    printf("words: %d\n\n", teste2);
-
-    char word = NULL;
-    teste = ft_printf("mine: %c", word);
-    printf("%d\n", teste);
-    teste2 = printf("original: %c", word);
-    printf("%d\n\n", teste2);
-
-    teste = ft_printf("mine: %c", 48);
-    printf("%d\n", teste);
-    teste2 = printf("original: %c", 48);
-    printf("%d\n\n", teste2);
-
-    ft_printf("--> Testing %%d <--\n");
-    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
-    teste = ft_printf("mine:  %d  ", 123);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %d  ", 123);
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %d  ", -123);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %d  ", -123);
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %d  ", 2147483647);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %d  ", 2147483647);
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %d  ", -2147483647);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %d  ", -2147483647);
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %d  ", 0);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %d  ", 0);
-    printf("words: %d\n\n", teste2);
-
-    ft_printf("--> Testing %%i <--\n");
-    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
-    teste = ft_printf("mine:  %i  ", 123);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %i  ", 123);
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %i  ", -123);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %i  ", -123);
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %i  ", 2147483647);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %i  ", 2147483647);
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %i  ", -2147483647);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %i  ", -2147483647);
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %i  ", 0);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %i  ", 0);
-    printf("words: %d\n\n", teste2);
-    
-    ft_printf("--> Testing %%u <--\n");
-    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
-    teste = ft_printf("mine:  %u  ", 123);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %u  ", 123);
-    printf("words: %d\n\n", teste2);
-
-    teste = ft_printf("mine:  %u  ", 2147483647);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %u  ", 2147483647);
-    printf("words: %d\n\n", teste2);
-    
-    teste = ft_printf("mine:  %u  ", 1);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %u  ", 1);
-    printf("words: %d\n\n", teste2);
-
-    ft_printf("--> Testing %%x <--\n");
-    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
-
-    teste = ft_printf("mine:  %x  ", 100);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %x  ", 100);
-    printf("words: %d\n\n", teste2);
-    
-    teste = ft_printf("mine:  %x  ", 2147483647);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %x  ", 2147483647);
-    printf("words: %d\n\n", teste2);
-    
-    teste = ft_printf("mine:  %x  ", 2);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %x  ", 2);
-    printf("words: %d\n\n", teste2);
-
-    ft_printf("--> Testing %%X <--\n");
-    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
-
-    teste = ft_printf("mine:  %X  ", 100);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %X  ", 100);
-    printf("words: %d\n\n", teste2);
-    
-    teste = ft_printf("mine:  %X  ", 2147483647);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %X  ", 2147483647);
-    printf("words: %d\n\n", teste2);
-    
-    teste = ft_printf("mine:  %X  ", 2);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %X  ", 2);
-    printf("words: %d\n\n", teste2);
-
-    ft_printf("--> Testing %%p <--\n");
-    ft_printf("\nEach test must have a difference of 4 in relation to the given value\n\n");
-
-    char *str1 = NULL;
-    char *str2 = "hello";
-    char *str3 = str2;
-
-    teste = ft_printf("mine:  %p  ", str1);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %p  ", str1);
-    printf("words: %d\n\n", teste2);
-    
-    teste = ft_printf("mine:  %p  ", &str2);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %p  ", &str2);
-    printf("words: %d\n\n", teste2);
-    
-    teste = ft_printf("mine:  %p  ", str3);
-    printf("words: %d\n", teste);
-    teste2 = printf("original:  %p  ", str3);
-    printf("words: %d\n\n", teste2);
-}    */
