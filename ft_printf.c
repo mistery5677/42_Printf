@@ -36,6 +36,7 @@ static int	ft_conversion(va_list args, const char format)
 	return (len);
 }
 
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
@@ -52,11 +53,13 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			len += ft_conversion(args, format[i + 1]);
-			i++;
+			i++;	
 		}
 		else
 			len += ft_putchar(format[i]);
 	}
 	va_end(args);
+	if(protect(format) % 2 != 0)
+		return -1;
 	return (len);
 }

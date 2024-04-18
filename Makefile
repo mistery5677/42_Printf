@@ -1,44 +1,37 @@
 NAME = libftprintf.a
-CC = gcc
+
+SRCS = ft_printf.c \
+	ft_printnbr.c \
+	ft_printstr.c \
+	ft_print_add.c 
+	
+OBJS = $(SRCS:.c=.o)	
 CFLAGS = -Wall -Werror -Wextra
-LIBC = ar rc
+AR = ar rc
 LIBR = ranlib
 LIBFTDIR =./libft
 LIBFT = $(LIBFTDIR)/libft.a
 RM = rm -f
 CP = cp
-SRCS = ft_printf.c \
-	ft_printnbr.c \
-	ft_printstr.c \
-	ft_print_add.c
-	
-OBJS = $(SRCS:.c=.o)
-EXECUTE = ./a.out
 
 all: $(NAME) $(LIBFT)
-
-$(NAME): $(LIBFT) $(OBJS) 
-	$(CP) $(LIBFT) $(NAME)
-	$(LIBC)	$(NAME) $(OBJS)
-	$(LIBR) $(NAME)
 
 $(LIBFT): $(LIBFTDIR)
 	@$(MAKE) -C $(LIBFTDIR)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(NAME): $(LIBFT) $(OBJS) 
+	$(CP) $(LIBFT) $(NAME)
+	$(AR)	$(NAME) $(OBJS)
+	$(LIBR) $(NAME)
+
 clean:
 	@$(MAKE) clean -C $(LIBFTDIR)
 	$(RM) $(OBJS)
 
 fclean:	clean
-	@$(MAKE) fclean -C $(LIBFTDIR)
+	$(RM) $(LIBFT)
 	$(RM) $(NAME)
-	$(RM) a.out
 
 re:	fclean all
 
-teste: all
-	$(CC) $(FLAGS) $(NAME)
-	@$(EXECUTE)
-	
+.PHONY: all clean fclean re

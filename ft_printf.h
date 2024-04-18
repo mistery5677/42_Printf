@@ -24,4 +24,6 @@ size_t	ft_printnbr(int nbr);
 size_t	ft_print_unsigned(unsigned int nbr);
 size_t	ft_print_hex(unsigned int num, int format);
 
+int protect(const char * format);
+
 #endif
