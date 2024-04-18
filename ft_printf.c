@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: miafonso <miafonso@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: miafonso <miafonso@student.42.fr>          +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2024/04/17 11:24:13 by miafonso          #+#    #+#             */
 /*   Updated: 2024/04/17 11:24:13 by miafonso         ###   ########.fr       */
 /*                                                                            */
@@ -36,12 +39,11 @@ static int	ft_conversion(va_list args, const char format)
 	return (len);
 }
 
-
 int	ft_printf(const char *format, ...)
 {
+	int		len;
 	va_list	args;
 	size_t	i;
-	int		len;
 
 	va_start(args, format);
 	if (format == NULL)
@@ -53,13 +55,13 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			len += ft_conversion(args, format[i + 1]);
-			i++;	
+			i++;
 		}
 		else
 			len += ft_putchar(format[i]);
 	}
 	va_end(args);
-	if(protect(format) % 2 != 0)
-		return -1;
+	if (protect(format) % 2 != 0)
+		return (-1);
 	return (len);
 }
