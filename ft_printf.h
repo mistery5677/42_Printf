@@ -19,7 +19,6 @@
 int		ft_printf(const char *format, ...);
 int		ft_putchar(char c);
 int		ft_print_add(unsigned long long nbr);
-int		protect(const char *format);
 size_t	ft_printstr(const char *str);
 size_t	ft_printnbr(int nbr);
 size_t	ft_print_unsigned(unsigned int nbr);

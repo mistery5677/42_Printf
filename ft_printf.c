@@ -15,11 +15,38 @@
 
 #include "ft_printf.h"
 
+static int	protect(const char *format)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = -1;
+	while (format[++i])
+	{
+		if (format[i] == '%')
+		{
+			count++;
+			i++;
+			if (format[i] == '%' || format[i] == 's' || format[i] == 'c'
+				|| format[i] == 'd' || format[i] == 'i' || format[i] == 'u'
+				|| format[i] == 'x' || format[i] == 'X' || format[i] == 'p')
+			{
+				count++;
+			}
+		}
+	}
+	return (count);
+}
+
 static int	ft_conversion(va_list args, const char format)
 {
 	int	len;
 
 	len = 0;
+
+	if (format == '\0')
+		return (0);
 	if (format == 'c')
 		len += ft_putchar(va_arg(args, int));
 	else if (format == 'd' || format == 'i')
