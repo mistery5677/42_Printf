@@ -26,6 +26,7 @@ static int	protect(const char *format)
 	{
 		if (format[i] == '%')
 		{
+
 			count++;
 			i++;
 			if (format[i] == '%' || format[i] == 's' || format[i] == 'c'
@@ -44,7 +45,7 @@ static int	ft_conversion(va_list args, const char format)
 	int	len;
 
 	len = 0;
-	if(args != NULL)
+	if (args != NULL)
 	{
 		if (format == 'c')
 			len += ft_putchar(va_arg(args, int));
@@ -91,4 +92,10 @@ int	ft_printf(const char *format, ...)
 		return (-1);
 	va_end(args);
 	return (len);
+}
+
+int main()
+{
+	int test = printf("hello %d %c\n", 10, 'c');
+	printf("%d", test);
 }
